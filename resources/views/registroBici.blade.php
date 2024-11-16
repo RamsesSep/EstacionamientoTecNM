@@ -527,10 +527,10 @@
     <div class="header">
         <button class="toggle-btn" aria-label="Abrir menú lateral">
             <!-- Icono de hamburguesa -->
-            <img src="IMG/Menu.svg" width="30" height="30" alt="Menú">
+            <img src="{{ asset('images/Menu.svg') }}" width="30" height="30" alt="Menú">
         </button>
-        <img src="IMG/tecnm.png" alt="Logo TECNM" class="logo">
-        <img src="IMG/itl.png" alt="Logo ITL" class="logo2">
+        <img src="{{ asset('images/tecnm.png') }}" alt="Logo TECNM" class="logo">
+        <img src="{{ asset('images/itl.png') }}" alt="Logo ITL" class="logo2">
     </div>
 
     <!-- Menú Lateral con la clase 'active' agregada para que esté abierto por defecto -->
@@ -539,17 +539,17 @@
         <ul>
             <li onclick="window.location.href='RegistrarVehiculo.html'">
                 <!-- Icono Carros -->
-                <img src="IMG/Car.svg" width="20" height="20" alt="Carros" style="margin-right: 10px;">
+                <img src="{{ asset('images/Car.svg') }}" width="20" height="20" alt="Carros" style="margin-right: 10px;">
                 <span>Registro de Carros</span>
             </li>
             <li onclick="window.location.href='Menu.html'">
                 <!-- Icono Regresar al Menú -->
-                <img src="IMG/Home.svg" width="20" height="20" alt="Menú" style="margin-right: 10px;">
+                <img src="{{ asset('images/Home.svg') }}" width="20" height="20" alt="Menú" style="margin-right: 10px;">
                 <span>Regresar al Menú</span>
             </li>
             <li class="salir" onclick="salir()">
                 <!-- Icono Salir -->
-                <img src="IMG/power.svg" width="20" height="20" alt="Salir" style="margin-right: 10px;">
+                <img src="{{ asset('images/power.svg') }}" width="20" height="20" alt="Salir" style="margin-right: 10px;">
                 <span>Cerrar sesión</span>
             </li>
         </ul>
@@ -608,12 +608,12 @@
                 <div class="buttons">
                     <!-- Botón de Eliminar -->
                     <button type="reset" class="icon-button" aria-label="Eliminar">
-                        <img src="IMG/delete.svg" alt="Eliminar" class="icon reset-icon">
+                        <img src="{{ asset('images/delete.svg') }}" alt="Eliminar" class="icon reset-icon">
                     </button>
 
                     <!-- Botón de Guardar -->
                     <button type="submit" class="icon-button" aria-label="Guardar">
-                        <img src="IMG/Save.svg" alt="Guardar" class="icon submit-icon">
+                        <img src="{{ asset('images/Save.svg') }}" alt="Guardar" class="icon submit-icon">
                     </button>
                 </div>
             </form>

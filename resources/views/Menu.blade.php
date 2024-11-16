@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menú Principal</title>
-    <link rel="shortcut icon" href="IMG/Home.svg">
+    <link rel="shortcut icon" href="{{ asset('images/Home.svg') }}">
     <style>
         /* Reset de estilos */
         * {
@@ -331,10 +331,10 @@
     <div class="header">
         <button class="toggle-btn">
             <!-- Icono de hamburguesa -->
-            <img src="IMG/Menu.svg" width="30" height="30" alt="menu">
+            <img src="{{ asset('images/Menu.svg') }}" width="30" height="30" alt="menu">
         </button>
-        <img src="IMG/tecnm.png" alt="Logo" class="logo">
-        <img src="IMG/itl.png" alt="Logo" class="logo2">
+        <img src="{{ asset('images/tecnm.png') }}" alt="Logo" class="logo">
+        <img src="{{ asset('images/itl.png') }}" alt="Logo" class="logo2">
     </div>
 
     <!-- Menú Lateral con la clase 'active' agregada para que esté abierto por defecto -->
@@ -343,22 +343,22 @@
         <ul>
             <li onclick="window.location.href='RegistrarVehiculo.html'">
                 <!-- Icono Carros -->
-                <img src="IMG/Car.svg" width="20" height="20" alt="salir" style="margin-right: 10px;">
+                <img src="{{ asset('images/Car.svg') }}" width="20" height="20" alt="salir" style="margin-right: 10px;">
                 <span>Registro de Carros</span>
             </li>
             <li onclick="window.location.href='Avance1.html'">
                 <!-- Icono Bicicleta -->
-                <img src="IMG/bici.svg" width="20" height="20" alt="salir" style="margin-right: 10px;">
+                <img src="{{ asset('images/bici.svg') }}" width="20" height="20" alt="salir" style="margin-right: 10px;">
                 <span>Registro de Bicicletas</span>
             </li>
             <li onclick="window.location.href='Perfil.html'">
                 <!-- Icono Perfil -->
-                <img src="IMG/person.svg" width="20" height="20" alt="salir" style="margin-right: 10px;">
+                <img src="{{ asset('images/person.svg') }}" width="20" height="20" alt="salir" style="margin-right: 10px;">
                 <span>Perfil</span>
             </li>
             <li class="salir" onclick="salir()">
                 <!-- Icono Salir -->
-                <img src="IMG/power.svg" width="20" height="20" alt="salir" style="margin-right: 10px;">
+                <img src="{{ asset('images/power.svg') }}" width="20" height="20" alt="salir" style="margin-right: 10px;">
                 <span>Cerrar sesión</span>
             </li>
         </ul>
@@ -368,10 +368,10 @@
     <div class="content">
         <div class="tabla-container">
             <!-- Botón de Añadir Registro -->
-<!-- Botón de Añadir Registro -->
-<button class="add-button" onclick="agregarRegistro()" title="Agregar Registro">
-    <img src="IMG/nuevo.svg" alt="nuevo" class="icon-image">
-</button>
+            <!-- Botón de Añadir Registro -->
+            <button class="add-button" onclick="agregarRegistro()" title="Agregar Registro">
+                <img src="{{ asset('images/nuevo.svg') }}" alt="nuevo" class="icon-image">
+            </button>
 
             <h2>Mis Registros</h2>
             <table class="tabla-registros" id="tablaRegistros">
