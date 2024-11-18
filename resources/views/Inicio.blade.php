@@ -172,14 +172,14 @@
         }
 
         .logo {
-    width: 150px; 
-    height: auto; 
-    margin-right: 20px; 
-}
-.logo2 {
-    width: 60px;
-    height: auto;
-}
+            width: 150px; 
+            height: auto; 
+            margin-right: 20px; 
+        }
+        .logo2 {
+            width: 60px;
+            height: auto;
+        }
 
         /* Responsividad */
         @media (max-width: 500px) {
@@ -244,8 +244,8 @@
 
     <!-- Barra de Encabezado -->
     <div class="header">
-        <img src="tecnm.png" alt="Logo" class="logo">
-        <img src="itl.png" alt="Logo" class="logo2">
+        <img src="{{ asset('images/tecnm.png') }}" alt="Logo" class="logo">
+        <img src="{{ asset('images/itl.png')}}" alt="Logo" class="logo2">
     </div>
 
     <!-- Contenido Principal -->

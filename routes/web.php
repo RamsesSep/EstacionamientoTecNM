@@ -19,4 +19,7 @@ Route::get('/', function () {
 Route::get('/', HomeController::class);
 
 Route::get('/menu', [MenuController::class, 'index']);
+Route::get('/menu/registro', [MenuController::class, 'registrarUsuario']);
+Route::get('/menu/monitoreo', [MenuController::class, 'monitoreo']);
 Route::get('/menu/registrar-bicicleta', [MenuController::class, 'registrarBici']);
+Route::get('/menu/registrar-automovil', [MenuController::class, 'registrarAuto']);

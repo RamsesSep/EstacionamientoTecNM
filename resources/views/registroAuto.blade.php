@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro de Vehículo</title>
-    <link rel="shortcut icon" href="IMG/Car.svg">
-    <link rel="stylesheet" href="CSS/styleRegistrarVehiculo.css">
+    <link rel="shortcut icon" href="{{ asset('images/Car.svg') }}">
+    <link rel="stylesheet" href="{{ asset('css/styleRegistrarVehiculo.css') }}">
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const toggleBtn = document.querySelector(".toggle-btn");
@@ -204,10 +204,10 @@
     <div class="header">
         <button class="toggle-btn" aria-label="Abrir menú lateral">
             <!-- Icono de hamburguesa -->
-            <img src="IMG/Menu.svg" width="30" height="30" alt="Menú">
+            <img src="{{ asset('images/Menu.svg') }}" width="30" height="30" alt="Menú">
         </button>
-        <img src="IMG/tecnm.png" alt="Logo TECNM" class="logo">
-        <img src="IMG/itl.png" alt="Logo ITL" class="logo2">
+        <img src="{{ asset('images/tecnm.png') }}" alt="Logo TECNM" class="logo">
+        <img src="{{ asset('images/itl.png') }}" alt="Logo ITL" class="logo2">
     </div>
 
     <!-- Menú Lateral con la clase 'active' agregada para que esté abierto por defecto -->
@@ -216,17 +216,17 @@
         <ul>
             <li onclick="window.location.href='Avance1.html'">
                 <!-- Icono bici -->
-                <img src="IMG/bici.svg" width="20" height="20" alt="Bici" style="margin-right: 10px;">
+                <img src="{{ asset('images/bici.svg') }}" width="20" height="20" alt="Bici" style="margin-right: 10px;">
                 <span>Registro de Bicis</span>
             </li>
             <li onclick="window.location.href='Menu.html'">
                 <!-- Icono Regresar al Menú -->
-                <img src="IMG/Home.svg" width="20" height="20" alt="Menú" style="margin-right: 10px;">
+                <img src="{{ asset('images/Home.svg') }}" width="20" height="20" alt="Menú" style="margin-right: 10px;">
                 <span>Regresar al Menú</span>
             </li>
             <li class="salir" onclick="salir()">
                 <!-- Icono Salir -->
-                <img src="IMG/power.svg" width="20" height="20" alt="Salir" style="margin-right: 10px;">
+                <img src="{{ asset('images/power.svg') }}" width="20" height="20" alt="Salir" style="margin-right: 10px;">
                 <span>Cerrar sesión</span>
             </li>
         </ul>
@@ -237,8 +237,8 @@
         <div class="tabla-container">
             <h2>Registro de Vehículo</h2>
 
-            <!-- Div para mensajes
-            <div id="mensaje"></div> -->
+            <!--Div para mensajes-->
+            <div id="mensaje"></div>
 
             <form id="registroForm" onsubmit="enviarFormulario(event)">
                 <!-- Detalles del vehículo -->
@@ -298,12 +298,12 @@
                 <div class="buttons">
                     <!-- Botón de Eliminar -->
                     <button type="reset" class="icon-button" aria-label="Eliminar">
-                        <img src="IMG/delete.svg" alt="Eliminar" class="icon reset-icon">
+                        <img src="{{ asset('images/delete.svg') }}" alt="Eliminar" class="icon reset-icon">
                     </button>
 
                     <!-- Botón de Guardar -->
                     <button type="submit" class="icon-button" aria-label="Guardar">
-                        <img src="IMG/Save.svg" alt="Guardar" class="icon submit-icon">
+                        <img src="{{ asset('images/Save.svg') }}" alt="Guardar" class="icon submit-icon">
                     </button>
                 </div>
             </form>

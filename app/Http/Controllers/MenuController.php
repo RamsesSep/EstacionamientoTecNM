@@ -11,8 +11,23 @@ class MenuController extends Controller
         return view('Menu');
     }
 
+    public function registrarUsuario()
+    {
+        return view('registro');
+    }
+
     public function registrarBici()
     {
         return view('registroBici');
+    }
+    
+    public function registrarAuto()
+    {
+        return view('registroAuto');
+    }
+
+    public function monitoreo()
+    {
+        return view('monitoreo');
     }
 }

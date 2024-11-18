@@ -403,8 +403,8 @@
 
     <!-- Barra de Encabezado -->
     <div class="header">
-        <img src="tecnm.png" alt="Logo TECNM" class="logo">
-        <img src="itl.png" alt="Logo ITL" class="logo2">
+        <img src="{{ asset('images/tecnm.png') }}" alt="Logo TECNM" class="logo">
+        <img src="{{ asset('images/itl.png') }}" alt="Logo ITL" class="logo2">
     </div>
 
     <!-- Contenido Principal -->
@@ -412,7 +412,7 @@
         <div class="registro-container">
             <!-- Botón de Cancelar -->
             <button class="cancel-btn" aria-label="Cancelar">
-                <img src="cancelar.svg" alt="Cancelar" width="40" height="40">
+                <img src="{{ asset('images/cancelar.svg') }}" alt="Cancelar" width="40" height="40">
             </button>
 
             <div class="titulo">Registro de Usuario</div>
