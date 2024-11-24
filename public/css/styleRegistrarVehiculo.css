@@ -96,6 +96,15 @@ body {
     transition: background 0.3s;
 }
 
+.sidebar ul li a {
+    color: #ecf0f1;
+    text-decoration: none;
+    /*padding: 15px 20px;
+    display: absolute;
+    align-items: center;
+    transition: background 0.3s;*/
+}
+
 .sidebar ul li:hover {
     background-color: #34495e;
 }

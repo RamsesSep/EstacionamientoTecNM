@@ -106,6 +106,11 @@
             transition: background 0.3s;
         }
 
+        .sidebar ul li a {
+            color: #ecf0f1;
+            text-decoration: none;
+        }
+
         .sidebar ul li:hover {
             background-color: #34495e;
         }
@@ -341,20 +346,37 @@
     <div class="sidebar active">
         <div class="logo">Menú</div>
         <ul>
-            <li onclick="window.location.href='RegistrarVehiculo.html'">
-                <!-- Icono Carros -->
-                <img src="{{ asset('images/Car.svg') }}" width="20" height="20" alt="salir" style="margin-right: 10px;">
-                <span>Registro de Carros</span>
+            <!--<li onclick="window.location.href='RegistrarVehiculo.html'">-->
+            <li>
+                <a href="{{ route('registrar.auto') }}">
+                    <!-- Icono Carros -->
+                    <img src="{{ asset('images/Car.svg') }}" width="20" height="20" alt="salir" style="margin-right: 10px;">
+                    <span>Registro de Carros</span>
+                </a>
             </li>
-            <li onclick="window.location.href='Avance1.html'">
-                <!-- Icono Bicicleta -->
-                <img src="{{ asset('images/bici.svg') }}" width="20" height="20" alt="salir" style="margin-right: 10px;">
-                <span>Registro de Bicicletas</span>
+            <!--<li onclick="window.location.href='Avance1.html'">-->
+            <li>
+                <a href="{{ route('registrar.bici') }}">
+                    <!-- Icono Bicicleta -->
+                    <img src="{{ asset('images/bici.svg') }}" width="20" height="20" alt="salir" style="margin-right: 10px;">
+                    <span>Registro de Bicicletas</span>
+                </a>
             </li>
-            <li onclick="window.location.href='Perfil.html'">
-                <!-- Icono Perfil -->
-                <img src="{{ asset('images/person.svg') }}" width="20" height="20" alt="salir" style="margin-right: 10px;">
-                <span>Perfil</span>
+            <!--Redireccionamiento a el modulo de monitoreo de estacionamiento-->
+            <li>
+                <a href="{{ route('monitoreo') }}">
+                    <!-- Icono monitoreo -->
+                    <img src="{{ asset('images/term-blanca.png') }}" width="20" height="20" alt="monitoreo" style="margin-right: 10px;">
+                    <span>Monitoreo</span>
+                </a>
+            </li>
+            <!--<li onclick="window.location.href='Perfil.html'">-->
+            <li>
+                <a href="{{ route('perfil') }}">
+                    <!-- Icono Perfil -->
+                    <img src="{{ asset('images/person.svg') }}" width="20" height="20" alt="salir" style="margin-right: 10px;">
+                    <span>Perfil</span>
+                </a>
             </li>
             <li class="salir" onclick="salir()">
                 <!-- Icono Salir -->

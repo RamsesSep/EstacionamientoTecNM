@@ -103,6 +103,15 @@
             transition: background 0.3s;
         }
 
+        .sidebar ul li a {
+            color: #ecf0f1;
+            text-decoration: none;
+            /*padding: 15px 20px;
+            display: absolute;
+            align-items: center;
+            transition: background 0.3s;*/
+        }
+
         .sidebar ul li:hover {
             background-color: #34495e;
         }
@@ -498,31 +507,49 @@
     <!-- Barra de Encabezado -->
     <div class="header">
         <button class="toggle-btn" aria-label="Abrir menú">
-            <img src="IMG/Menu.svg" width="30" height="30" alt="Menú">
+            <img src="{{ asset('images/Menu.svg') }}" width="30" height="30" alt="Menú">
         </button>
-        <img src="IMG/tecnm.png" alt="Logo TECNM" class="logo">
-        <img src="IMG/itl.png" alt="Logo ITL" class="logo2">
+        <img src="{{ asset('images/tecnm.png') }}" alt="Logo TECNM" class="logo">
+        <img src="{{ asset('images/itl.png') }}" alt="Logo ITL" class="logo2">
     </div>
 
     <!-- Menú Lateral  -->
     <div class="sidebar active">
         <div class="logo">Perfil</div>
         <ul>
-            <li onclick="window.location.href='RegistrarVehiculo.html'">
-                <img src="IMG/Car.svg" width="20" height="20" alt="Carros" style="margin-right: 10px;">
-                <span>Registro de Carros</span>
+            <!--<li onclick="window.location.href='RegistrarVehiculo.html'">-->
+            <li>
+                <a href="{{ route('registrar.auto') }}">
+                    <!-- Icono Carros -->
+                    <img src="{{ asset('images/Car.svg') }}" width="20" height="20" alt="salir" style="margin-right: 10px;">
+                    <span>Registro de Carros</span>
+                </a>
             </li>
-            <li onclick="window.location.href='Avance1.html'">
-                <!-- Icono Bicicleta -->
-                <img src="IMG/bici.svg" width="20" height="20" alt="Bicicletas" style="margin-right: 10px;">
-                <span>Registro de Bicicletas</span>
+            <!--<li onclick="window.location.href='Avance1.html'">-->
+            <li>
+                <a href="{{ route('registrar.bici') }}">
+                    <!-- Icono Bicicleta -->
+                    <img src="{{ asset('images/bici.svg') }}" width="20" height="20" alt="salir" style="margin-right: 10px;">
+                    <span>Registro de Bicicletas</span>
+                </a>
             </li>
-            <li onclick="window.location.href='Menu.html'">
-                <img src="IMG/Home.svg" width="20" height="20" alt="Menú" style="margin-right: 10px;">
-                <span>Regresar al Menú</span>
+            <!--Redireccionamiento a el modulo de monitoreo de estacionamiento-->
+            <li>
+                <a href="{{ route('monitoreo') }}">
+                    <!-- Icono monitoreo -->
+                    <img src="{{ asset('images/term-blanca.png') }}" width="20" height="20" alt="monitoreo" style="margin-right: 10px;">
+                    <span>Monitoreo</span>
+                </a>
+            </li>
+            <!--<li onclick="window.location.href='Menu.html'">-->
+            <li>
+                <a href="{{ route('inicio') }}">
+                    <img src="{{ asset('images/Home.svg') }}" width="20" height="20" alt="Menú" style="margin-right: 10px;">
+                    <span>Regresar al Menú</span>
+                </a>
             </li>
             <li class="salir" onclick="salir()">
-                <img src="IMG/power.svg" width="20" height="20" alt="Salir" style="margin-right: 10px;">
+                <img src="{{ asset('images/power.svg') }}" width="20" height="20" alt="Salir" style="margin-right: 10px;">
                 <span>Cerrar sesión</span>
             </li>
         </ul>

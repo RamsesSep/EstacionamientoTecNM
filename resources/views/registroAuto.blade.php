@@ -214,15 +214,28 @@
     <div class="sidebar active">
         <div class="logo">Registro</div>
         <ul>
-            <li onclick="window.location.href='Avance1.html'">
-                <!-- Icono bici -->
-                <img src="{{ asset('images/bici.svg') }}" width="20" height="20" alt="Bici" style="margin-right: 10px;">
-                <span>Registro de Bicis</span>
+            <!--<li onclick="window.location.href='Avance1.html'">-->
+            <li>
+                <a href="{{ route('registrar.bici') }}">
+                    <!-- Icono Bicicleta -->
+                    <img src="{{ asset('images/bici.svg') }}" width="20" height="20" alt="salir" style="margin-right: 10px;">
+                    <span>Registro de Bicicletas</span>
+                </a>
             </li>
-            <li onclick="window.location.href='Menu.html'">
-                <!-- Icono Regresar al Menú -->
-                <img src="{{ asset('images/Home.svg') }}" width="20" height="20" alt="Menú" style="margin-right: 10px;">
-                <span>Regresar al Menú</span>
+            <!--Redireccionamiento a el modulo de monitoreo de estacionamiento-->
+            <li>
+                <a href="{{ route('monitoreo') }}">
+                    <!-- Icono monitoreo -->
+                    <img src="{{ asset('images/term-blanca.png') }}" width="20" height="20" alt="monitoreo" style="margin-right: 10px;">
+                    <span>Monitoreo</span>
+                </a>
+            </li>
+            <!--<li onclick="window.location.href='Menu.html'">-->
+            <li>
+                <a href="{{ route('inicio') }}">
+                    <img src="{{ asset('images/Home.svg') }}" width="20" height="20" alt="Menú" style="margin-right: 10px;">
+                    <span>Regresar al Menú</span>
+                </a>
             </li>
             <li class="salir" onclick="salir()">
                 <!-- Icono Salir -->

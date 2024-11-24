@@ -377,10 +377,10 @@
     <div class="header">
         <button class="toggle-btn" aria-label="Abrir menú lateral">
             <!-- Icono de hamburguesa -->
-            <img src="IMG/Menu.svg" width="30" height="30" alt="Menú">
+            <img src="{{ asset('images/Menu.svg') }}" width="30" height="30" alt="Menú">
         </button>
-        <img src="IMG/tecnm.png" alt="Logo TECNM" class="logo">
-        <img src="IMG/itl.png" alt="Logo ITL" class="logo2">
+        <img src="{{ asset('images/tecnm.png') }}" alt="Logo TECNM" class="logo">
+        <img src="{{ asset('images/itl.png') }}" alt="Logo ITL" class="logo2">
     </div>
 
     <!-- Menú Lateral Dinámico -->
@@ -388,23 +388,23 @@
         <div class="logo">Menú</div>
         <ul>
             <li onclick="window.location.href='registro_carros.html'">
-                <img src="IMG/Car.svg" width="20" height="20" alt="Registro de Carros">
+                <img src="{{ asset('images/Car.svg') }}" width="20" height="20" alt="Registro de Carros">
                 <span>Registro de Carros</span>
             </li>
             <li onclick="window.location.href='registro_motos.html'">
-                <img src="IMG/Moto.svg" width="20" height="20" alt="Registro de Motos">
+                <img src="{{ asset('images/Moto.svg') }}" width="20" height="20" alt="Registro de Motos">
                 <span>Registro de Motos</span>
             </li>
             <li onclick="window.location.href='menu.html'">
-                <img src="IMG/Home.svg" width="20" height="20" alt="Menú Principal">
+                <img src="{{ asset('images/Home.svg') }}" width="20" height="20" alt="Menú Principal">
                 <span>Regresar al Menú</span>
             </li>
             <li class="imprimir" onclick="imprimirPagina()">
-                <img src="IMG/print.svg" width="20" height="20" alt="Imprimir">
+                <img src="{{ asset('images/print.svg') }}" width="20" height="20" alt="Imprimir">
                 <span>Imprimir</span>
             </li>
             <li class="salir" onclick="salir()">
-                <img src="IMG/power.svg" width="20" height="20" alt="Salir">
+                <img src="{{ asset('images/power.svg') }}" width="20" height="20" alt="Salir">
                 <span>Cerrar sesión</span>
             </li>
         </ul>
@@ -418,12 +418,12 @@
             <!--  Ícono en la Parte Superior Derecha  -->
             <div class="icono-menu">
                 <a href="Menu.html" aria-label="Ir al Menú">
-                    <img src="IMG/cancelar.svg" alt="Ir al Menú" class="menu-icon">
+                    <img src="{{ asset('images/cancelar.svg') }}" alt="Ir al Menú" class="menu-icon">
                 </a>
             </div>
 
             <p>Este es tu código QR generado:</p>
-            <img src="IMG/Commons_QR_code.png" alt="Código QR">
+            <img src="{{ asset('images/Commons_QR_code.png') }}" alt="Código QR">
         </div>
     </div>
 

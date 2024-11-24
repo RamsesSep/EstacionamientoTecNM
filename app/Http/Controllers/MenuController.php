@@ -30,4 +30,14 @@ class MenuController extends Controller
     {
         return view('monitoreo');
     }
+
+    public function perfil()
+    {
+        return view('perfil');
+    }
+
+    public function qr()
+    {
+        return view('codigoQR');
+    }
 }
