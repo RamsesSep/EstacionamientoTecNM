@@ -393,7 +393,7 @@
         function cancelar() {
             if (confirm("¿Estás seguro de que deseas cancelar el registro?")) {
                 // Redirigir a la página de inicio o cualquier otra acción
-                window.location.href = "Inicio.html";
+                window.location.href = "{{ route('inicio.sesion'); }}";
             }
         }
     </script>

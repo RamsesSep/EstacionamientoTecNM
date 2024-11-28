@@ -486,7 +486,7 @@
         // Función para salir del sistema
         function salir() {
             if (confirm("¿Estás seguro de que deseas salir?")) {
-                window.location.href = "Inicio.html";
+                window.location.href = "{{ route('inicio.sesion') }}";
             }
         }
 
@@ -537,12 +537,12 @@
     <div class="sidebar active">
         <div class="logo">Registro</div>
         <ul>
-            <li onclick="window.location.href='RegistrarVehiculo.html'">
+            <li onclick="window.location.href='{{ route('registrar.auto') }}'">
                 <!-- Icono Carros -->
                 <img src="{{ asset('images/Car.svg') }}" width="20" height="20" alt="Carros" style="margin-right: 10px;">
                 <span>Registro de Carros</span>
             </li>
-            <li onclick="window.location.href='Menu.html'">
+            <li onclick="window.location.href='{{ route('inicio') }}'">
                 <!-- Icono Regresar al Menú -->
                 <img src="{{ asset('images/Home.svg') }}" width="20" height="20" alt="Menú" style="margin-right: 10px;">
                 <span>Regresar al Menú</span>

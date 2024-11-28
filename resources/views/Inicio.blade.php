@@ -266,11 +266,11 @@
                 </div>
 
                 <!-- Enlace para restablecer contraseña -->
-                <a href="establecer_contraseña.html" class="olvidaste-contrasena">¿Has olvidado la contraseña?</a>
+                <a href="{{ route('recuperar.contraseña'); }}" class="olvidaste-contrasena">¿Has olvidado la contraseña?</a>
 
                 <!-- Botones -->
                 <div class="botones">
-                    <a href="registro.html" class="boton-registrarse">Registrarse</a>
+                    <a href="{{ route('registro.usuario'); }}" class="boton-registrarse">Registrarse</a>
                     <button type="submit" class="boton-login">Iniciar Sesión</button>
                 </div>
             </form>

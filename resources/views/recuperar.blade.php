@@ -464,7 +464,7 @@
         function cancelarAccion() {
             if (confirm("¿Estás seguro de que deseas cancelar el restablecimiento de contraseña?")) {
                 // Redirigir al inicio de sesión o a otra página
-                window.location.href = "Inicio.html"; // Cambia "Inicio.html" por la página deseada
+                window.location.href = "{{ route('inicio.sesion') }}"; // Cambia "Inicio.html" por la página deseada
             }
         }
     </script>
@@ -474,8 +474,8 @@
 
     <!-- Barra de Encabezado -->
     <div class="header">
-        <img src="tecnm.png" alt="Logo TECNM" class="logo">
-        <img src="itl.png" alt="Logo ITL" class="logo2">
+        <img src="{{ asset('images/tecnm.png') }}" alt="Logo TECNM" class="logo">
+        <img src="{{ asset('images/itl.png') }}" alt="Logo ITL" class="logo2">
     </div>
 
     <!-- Contenido Principal -->
@@ -490,7 +490,7 @@
                     aria-label="Cancelar"
                     onkeypress="handleKeyPress(event, cancelarAccion)"
                 >
-                    <img src="cancelar.svg" alt="Cancelar">
+                    <img src="{{ asset('images/cancelar.svg') }}" alt="Cancelar">
                 </button>
             </div>
 

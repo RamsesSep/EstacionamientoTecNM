@@ -377,7 +377,7 @@
 
         function salir() {
             if (confirm("¿Estás seguro de que deseas salir?")) {
-                window.location.href = "Inicio.html";
+                window.location.href = "{{ route('inicio.sesion') }}";
             }
         }
 
@@ -581,7 +581,7 @@
                         aria-label="Eliminar"
                         onkeypress="handleKeyPress(event, resetForm)"
                     >
-                        <img src="IMG/delete.svg" alt="Eliminar">
+                        <img src="{{ asset('images/delete.svg') }}" alt="Eliminar">
                     </button>
 
                     <!-- Botón de Guardar -->
@@ -593,7 +593,7 @@
                         aria-label="Guardar"
                         onkeypress="handleKeyPress(event, submitForm)"
                     >
-                        <img src="IMG/Save.svg" alt="Guardar">
+                        <img src="{{ asset('images/Save.svg') }}" alt="Guardar">
                     </button>
                 </div>
             </form>

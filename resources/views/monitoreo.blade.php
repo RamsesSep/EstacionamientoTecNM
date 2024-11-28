@@ -55,7 +55,7 @@
 
         function salir() {
             if (confirm("¿Estás seguro de que deseas salir?")) {
-                window.location.href = "Inicio.html";
+                window.location.href = "{{ route('inicio.sesion') }}";
             }
         }
 
@@ -85,17 +85,22 @@
     <div class="sidebar active">
         <div class="logo">Monitoreo</div>
         <ul>
-            <li onclick="window.location.href='RegistrarVehiculo.html'">
+            <li onclick="window.location.href='{{ route('registrar.auto') }}'">
                 <!-- Icono Carros -->
                 <img src="{{ asset('images/Car.svg') }}" width="20" height="20" alt="salir" style="margin-right: 10px;">
                 <span>Registro de Carros</span>
             </li>
-            <li onclick="window.location.href='Avance1.html'">
+            <li onclick="window.location.href='{{ route('registrar.bici') }}'">
                 <!-- Icono Bicicleta -->
                 <img src="{{ asset('images/bici.svg') }}" width="20" height="20" alt="salir" style="margin-right: 10px;">
                 <span>Registro de Bicicletas</span>
             </li>
-            <li onclick="window.location.href='Perfil.html'">
+            <li onclick="window.location.href='{{ route('inicio') }}'">
+                <!-- Icono Regresar al Menú -->
+                <img src="{{ asset('images/Home.svg') }}" width="20" height="20" alt="Menú" style="margin-right: 10px;">
+                <span>Regresar al Menú</span>
+            </li>
+            <li onclick="window.location.href='{{ route('perfil') }}'">
                 <!-- Icono Perfil -->
                 <img src="{{ asset('images/person.svg') }}" width="20" height="20" alt="salir" style="margin-right: 10px;">
                 <span>Perfil</span>

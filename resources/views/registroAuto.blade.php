@@ -98,6 +98,7 @@
         }
 
         // Función para manejar el envío del formulario y redirigir a codigoQR.html
+        /*
         function enviarFormulario(event) {
             event.preventDefault();
 
@@ -159,19 +160,20 @@
             };
             reader.readAsDataURL(fotoBici);
         }
+        */
 
         // Función para salir del sistema
         function salir() {
             if (confirm("¿Estás seguro de que deseas salir?")) {
-                window.location.href = "Inicio.html";
+                window.location.href = "{{ route('inicio.sesion') }}";
             }
         }
-
-        // Función para ver el Código QR (Implementa según tu lógica)
+        /*
+        // Función para ver el Código QR
         function verCodigoQR(id) {
             window.location.href = `codigoQR.html?id=${id}`;
         }
-
+        */
         // Función para manejar eventos de teclado (Enter) en los íconos
         function handleKeyPress(event, action) {
             if (event.key === 'Enter' || event.keyCode === 13) {
@@ -199,6 +201,10 @@
 </head>
 
 <body>
+
+    @if(session('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
+    @endif
 
     <!-- Barra de Encabezado -->
     <div class="header">
@@ -252,8 +258,12 @@
 
             <!--Div para mensajes-->
             <div id="mensaje"></div>
+            
+            <!-- ****************************** FORMULARIO ****************************** -->
 
-            <form id="registroForm" onsubmit="enviarFormulario(event)">
+            <!-- <form id="registroForm" onsubmit="enviarFormulario(event)"> -->
+            <form method="POST" action="{{ route('registrar-vehiculo') }}" enctype="multipart/form-data">
+
                 <!-- Detalles del vehículo -->
                 <div class="form-group">
                     <label for="marcaVehiculo">Datos del Vehículo</label>
@@ -307,7 +317,7 @@
                         <option value="moto">Motocicleta</option>
                     </select>
                 </div>
-
+                <!-- ************************* BOTONES ************************* -->
                 <div class="buttons">
                     <!-- Botón de Eliminar -->
                     <button type="reset" class="icon-button" aria-label="Eliminar">

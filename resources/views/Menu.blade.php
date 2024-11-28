@@ -316,7 +316,7 @@
 
         function salir() {
             if (confirm("¿Estás seguro de que deseas salir?")) {
-                window.location.href = "Inicio.html";
+                window.location.href = "{{ route('inicio.sesion') }}";
             }
         }
 
@@ -325,7 +325,7 @@
         }
 
         function agregarRegistro() {
-            window.location.href = "Avance1.html";
+            window.location.href = "{{ route('registrar.bici') }}";
         }
     </script>
 </head>

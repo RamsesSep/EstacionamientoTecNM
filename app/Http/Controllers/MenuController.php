@@ -20,11 +20,6 @@ class MenuController extends Controller
     {
         return view('registroBici');
     }
-    
-    public function registrarAuto()
-    {
-        return view('registroAuto');
-    }
 
     public function monitoreo()
     {
@@ -39,5 +34,10 @@ class MenuController extends Controller
     public function qr()
     {
         return view('codigoQR');
+    }
+
+    public function recuperar()
+    {
+        return view('recuperar');
     }
 }
