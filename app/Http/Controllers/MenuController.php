@@ -11,11 +11,6 @@ class MenuController extends Controller
         return view('Menu');
     }
 
-    public function registrarUsuario()
-    {
-        return view('registro');
-    }
-
     public function registrarBici()
     {
         return view('registroBici');

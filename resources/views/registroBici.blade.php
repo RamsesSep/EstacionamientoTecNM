@@ -486,6 +486,7 @@
         // Función para salir del sistema
         function salir() {
             if (confirm("¿Estás seguro de que deseas salir?")) {
+                localStorage.clear();
                 window.location.href = "{{ route('inicio.sesion') }}";
             }
         }
@@ -542,7 +543,7 @@
                 <img src="{{ asset('images/Car.svg') }}" width="20" height="20" alt="Carros" style="margin-right: 10px;">
                 <span>Registro de Carros</span>
             </li>
-            <li onclick="window.location.href='{{ route('inicio') }}'">
+            <li onclick="window.location.href='{{ route('menu.autos') }}'">
                 <!-- Icono Regresar al Menú -->
                 <img src="{{ asset('images/Home.svg') }}" width="20" height="20" alt="Menú" style="margin-right: 10px;">
                 <span>Regresar al Menú</span>

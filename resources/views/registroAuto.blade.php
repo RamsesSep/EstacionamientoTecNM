@@ -165,6 +165,7 @@
         // Función para salir del sistema
         function salir() {
             if (confirm("¿Estás seguro de que deseas salir?")) {
+                localStorage.clear();
                 window.location.href = "{{ route('inicio.sesion') }}";
             }
         }
@@ -202,9 +203,7 @@
 
 <body>
 
-    @if(session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
-    @endif
+    
 
     <!-- Barra de Encabezado -->
     <div class="header">
@@ -238,7 +237,7 @@
             </li>
             <!--<li onclick="window.location.href='Menu.html'">-->
             <li>
-                <a href="{{ route('inicio') }}">
+                <a href="{{ route('menu.autos') }}">
                     <img src="{{ asset('images/Home.svg') }}" width="20" height="20" alt="Menú" style="margin-right: 10px;">
                     <span>Regresar al Menú</span>
                 </a>
@@ -262,7 +261,9 @@
             <!-- ****************************** FORMULARIO ****************************** -->
 
             <!-- <form id="registroForm" onsubmit="enviarFormulario(event)"> -->
-            <form method="POST" action="{{ route('registrar-vehiculo') }}" enctype="multipart/form-data">
+            <form method="POST" action="/inicio/registrar-vehiculo/nuevo">
+                
+                @csrf
 
                 <!-- Detalles del vehículo -->
                 <div class="form-group">
@@ -317,6 +318,13 @@
                         <option value="moto">Motocicleta</option>
                     </select>
                 </div>
+
+                <!-- Numero de control -->
+                <div class="form-group">
+                    <label for="numeroControl">Ingresa su numero de control:</label>
+                    <input type="text" id="numeroControl" name="numeroControl" placeholder="ejemplo: 19240526" required>
+                </div>
+
                 <!-- ************************* BOTONES ************************* -->
                 <div class="buttons">
                     <!-- Botón de Eliminar -->

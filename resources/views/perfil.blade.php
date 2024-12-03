@@ -377,6 +377,7 @@
 
         function salir() {
             if (confirm("¿Estás seguro de que deseas salir?")) {
+                localStorage.clear();
                 window.location.href = "{{ route('inicio.sesion') }}";
             }
         }
@@ -543,7 +544,7 @@
             </li>
             <!--<li onclick="window.location.href='Menu.html'">-->
             <li>
-                <a href="{{ route('inicio') }}">
+                <a href="{{ route('menu.autos') }}">
                     <img src="{{ asset('images/Home.svg') }}" width="20" height="20" alt="Menú" style="margin-right: 10px;">
                     <span>Regresar al Menú</span>
                 </a>

@@ -7,32 +7,60 @@ use App\Models\Vehiculo;
 
 class VehiculoController extends Controller
 {
+    // Controlador de enrutamiento
     public function create()
     {
         return view('registroAuto');
     }
 
+    // Controlador store | Request $request
     public function store(Request $request)
     {
-        $request->validate([
-            'marca' => 'required',
-            'modelo' => 'required',
-            // ... otras validaciones
-            'foto' => 'image|mimes:jpeg,png,jpg|max:2048', // Validación de la imagen
-        ]);
+        $vehiculo = new Vehiculo();
 
-        $vehiculo = new Vehiculo;
-        $vehiculo->marca = $request->marca;
-        $vehiculo->modelo = $request->modelo;
-        // ... asignar otros campos
-
-        if ($request->hasFile('foto')) {
-            $ruta = $request->file('foto')->store('public/imagenes'); // Guarda la imagen
-            $vehiculo->foto = $ruta;
-        }
+        $vehiculo->placas = $request->placasVehiculo;
+        $vehiculo->marca  = $request->marcaVehiculo;
+        $vehiculo->modelo = $request->modeloVehiculo;
+        $vehiculo->color  = $request->color;
+        $vehiculo->tipo   = $request->tipo;
+        $vehiculo->numero_control = $request->numeroControl;
 
         $vehiculo->save();
 
-        return redirect()->route('registrar-vehiculo')->with('success', 'Vehículo registrado correctamente');
+        return redirect('/inicio');
     }
+
+    public function getVehiculos(Request $request)
+    {
+        // Obtener el número de control del localStorage
+        $numeroControl = $request->input('numero_control');
+        
+        //echo "Este es el numero de control:".$numeroControl;
+        // Recupera todos los registros de la tabla 'vehiculos'
+        /*
+        $vehiculos = Vehiculo::all();
+        // Envía los datos a la vista
+        return view('Menu', compact('vehiculos'));
+        */
+        // Obtener los vehículos del usuario con el número de control especificado
+        $vehiculos = Vehiculo::where('numero_control', $numeroControl)->get();
+
+        return view('Menu', compact('vehiculos'));
+        //return response()->json($vehiculos); // Devolver los vehículos como JSON
+    }
+
+    public function index()
+    {
+        // Obtener los vehículos que quieres mostrar en el menú
+        $vehiculos = Vehiculo::all();
+
+        return view('Menu', compact('vehiculos'));
+    }
+
+    public function obtenerVehiculos()
+    {
+        //
+    }
+
 }
+?>

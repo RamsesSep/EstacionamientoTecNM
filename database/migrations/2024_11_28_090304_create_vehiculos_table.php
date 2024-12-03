@@ -11,12 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('bicicletas', function (Blueprint $table) {
-            $table->id();
-            $table->string('nombre', 100);
-            $table->string('color', 50)->nullable();
-            $table->string('foto', 255)->nullable();
-            $table->integer('numero_control')->nullable();
+        Schema::create('vehiculos', function (Blueprint $table) {
+            $table->id();  
+
+            $table->string('placas');  
+
+            $table->string('marca');
+            $table->string('modelo');
+            $table->string('color');
+            $table->string('tipo');
+            $table->string('numero_control');
             $table->timestamps();
         });
     }
@@ -26,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('bicicletas');
+        Schema::dropIfExists('vehiculos');
     }
 };

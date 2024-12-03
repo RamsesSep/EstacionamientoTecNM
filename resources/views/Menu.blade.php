@@ -283,7 +283,7 @@
                 }
             });
 
-            // Cargar registros desde LocalStorage
+            /* Cargar registros desde LocalStorage
             const tabla = document.getElementById('tablaRegistros').getElementsByTagName('tbody')[0];
             const registros = JSON.parse(localStorage.getItem('registros')) || [];
 
@@ -311,11 +311,12 @@
                     const celdaCodigoQR = fila.insertCell();
                     celdaCodigoQR.innerHTML = `<button class="codigo-qr" onclick="verCodigoQR('${registro.id}')">Código QR</button>`;
                 });
-            }
+            }*/
         });
 
         function salir() {
             if (confirm("¿Estás seguro de que deseas salir?")) {
+                localStorage.clear();
                 window.location.href = "{{ route('inicio.sesion') }}";
             }
         }
@@ -327,6 +328,22 @@
         function agregarRegistro() {
             window.location.href = "{{ route('registrar.bici') }}";
         }
+
+        // Recuperar el localStorage
+        // Obtener el número de control de la variable de sesión
+        var numeroControl = {!! json_encode(session('numeroControl')) !!}; 
+
+        // Guardar el número de control en el localStorage
+        if (numeroControl) {
+        localStorage.setItem('numeroControl', numeroControl);
+        }
+
+        // Obtener el número de control del localStorage en otras páginas
+        var numeroControlAlmacenado = localStorage.getItem('numeroControl');
+        console.log(numeroControlAlmacenado); // Usar el número de control
+
+        
+
     </script>
 </head>
 
@@ -395,19 +412,44 @@
                 <img src="{{ asset('images/nuevo.svg') }}" alt="nuevo" class="icon-image">
             </button>
 
-            <h2>Mis Registros</h2>
+            <h2 id="tituloRegistros">Mis Registros</h2>
+            <script>
+                var titulo = document.getElementById('tituloRegistros');
+                if (numeroControlAlmacenado) {
+                  titulo.textContent = 'Mis Registros - ' + numeroControlAlmacenado;
+                }
+            </script>              
             <table class="tabla-registros" id="tablaRegistros">
                 <thead>
                     <tr>
-                        <th>Tipo</th>
-                        <th>Nombre</th>
-                        <th>Color</th>
-                        <th>Fecha de Registro</th>
-                        <th>Código QR</th>
+                        <th>ID</th>
+                        <th>placas</th>
+                        <th>marcar</th>
+                        <th>modelo</th>
+                        <th>color</th>
+                        <th>tipo</th>
+                        <th>numero_control</th>
+                        <th>fecha de creacion</th>
+                        <th>ultima actualizacion</th>
+                        <th>codigo QR</th>
                     </tr>
                 </thead>
                 <tbody>
                     <!-- Los registros se cargarán aquí -->
+                    @foreach ($vehiculos as $vehiculo)
+                        <tr>
+                            <td>{{ $vehiculo->id }}</td>
+                            <td>{{ $vehiculo->placas }}</td>
+                            <td>{{ $vehiculo->marca }}</td>
+                            <td>{{ $vehiculo->modelo }}</td>
+                            <td>{{ $vehiculo->color }}</td>
+                            <td>{{ $vehiculo->tipo }}</td>
+                            <td>{{ $vehiculo->numero_control }}</td>
+                            <td>{{ $vehiculo->created_at }}</td>
+                            <td>{{ $vehiculo->updated_at }}</td>
+                            <td> <img src="data:image/png;base64,{{ $vehiculo->qr_code }} "> </td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>

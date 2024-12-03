@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\VehiculoController;
+use App\Http\Controllers\RegistroUsuarioController;
 
 //Get
 //Post
@@ -19,18 +20,34 @@ Route::get('/', function () {
 //Route::get('/menu/registrar-bicicleta', [MenuController::class, 'registrarBici']);
 //Route::get('/menu/registrar-automovil', [MenuController::class, 'registrarAuto']);
 
+// RUTAS DE ACCESO AL SISTEMA
 Route::get('/', HomeController::class)->name('inicio.sesion');
-
-Route::get('/registro', [MenuController::class, 'registrarUsuario'])->name('registro.usuario');
+Route::post('/login', [HomeController::class, 'loguearse']);
+Route::get('/registro', [RegistroUsuarioController::class, 'registrarUsuario'])->name('registro.usuario');
+Route::post('/registro', [RegistroUsuarioController::class, 'nuevoUsuario']);
 Route::get('/recuperar-contraseña', [MenuController::class, 'recuperar'])->name('recuperar.contraseña');
 
-Route::get('/inicio', [MenuController::class, 'index'])->name('inicio');
+// RUTAS PRINCIPALES
+//Route::get('/inicio', [MenuController::class, 'index'])->name('inicio');
+Route::get('/inicio', [VehiculoController::class, 'getVehiculos'])->name('menu.autos');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    });
+});
+
 Route::get('/inicio/monitoreo', [MenuController::class, 'monitoreo'])->name('monitoreo');
 Route::get('/inicio/registrar-bicicleta', [MenuController::class, 'registrarBici'])->name('registrar.bici');
 Route::get('/inicio/perfil', [MenuController::class, 'perfil'])->name('perfil');
 Route::get('/inicio/qr', [MenuController::class, 'qr'])->name('qr');
 
-
-#Route::get('/inicio/registrar-automovil', [MenuController::class, 'registrarAuto'])->name('registrar.auto');
+// RUTAS DEL REGISTRO DE AUTOS
 Route::get('/inicio/registrar-vehiculo', [VehiculoController::class, 'create'])->name('registrar.auto');
-Route::post('/inicio/registrar-vehiculo', [VehiculoController::class, 'store']);
+// Esta es la ruta que usa el formulario
+Route::post('/inicio/registrar-vehiculo/nuevo', [VehiculoController::class, 'store']);
+// Esta es la ruta que recupera los vehiculos
+//Route::get('/vehiculos/{vehiculo}', [VehiculoController::class, 'show'])->name('vehiculo.detalle');
+//Route::get('/obtener-vehiculos', [VehiculoController::class, 'obtenerVehiculos']);
+
+

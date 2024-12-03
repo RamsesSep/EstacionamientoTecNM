@@ -79,7 +79,7 @@
             color: #f0f0f0;
         }
 
-        input[type="text"],
+        input[type="number"],
         input[type="password"] {
             width: 100%;
             padding: 12px 10px;
@@ -92,7 +92,7 @@
             transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
 
-        input[type="text"]:focus,
+        input[type="number"]:focus,
         input[type="password"]:focus {
             border-color: #007BFF;
             box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
@@ -251,18 +251,21 @@
     <!-- Contenido Principal -->
     <div class="content">
         <div class="login-container">
+            
             <div class="titulo">Inicio de Sesión</div>
-            <form id="loginForm" onsubmit="iniciarSesion(event)">
-                <!-- Usuario -->
+
+            <form id="loginForm" method="POST" action="/login">
+                @csrf
+                <!-- Numero de control -->
                 <div class="form-group">
-                    <label for="usuario"></label>
-                    <input type="text" id="usuario" name="usuario" placeholder="Ingresa tu usuario" required>
+                    <label for="numero_control"></label>
+                    <input type="number" id="numero_control" name="numero_control" placeholder="Ingresa tu número de control" required autocomplete="email">
                 </div>
 
                 <!-- Contraseña -->
                 <div class="form-group">
                     <label for="contrasena"></label>
-                    <input type="password" id="contrasena" name="contrasena" placeholder="Ingresa tu contraseña" required>
+                    <input type="password" id="contraseña" name="contraseña" placeholder="Ingresa tu contraseña" required>
                 </div>
 
                 <!-- Enlace para restablecer contraseña -->
@@ -273,6 +276,7 @@
                     <a href="{{ route('registro.usuario'); }}" class="boton-registrarse">Registrarse</a>
                     <button type="submit" class="boton-login">Iniciar Sesión</button>
                 </div>
+                
             </form>
         </div>
     </div>

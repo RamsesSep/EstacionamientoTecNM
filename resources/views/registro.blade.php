@@ -338,8 +338,9 @@
             }
         }
 
+        // Genera un código de 6 dígitos
         function generarCodigoVerificacion() {
-            return Math.floor(100000 + Math.random() * 900000).toString(); // Genera un código de 6 dígitos
+            return Math.floor(100000 + Math.random() * 900000).toString(); 
         }
 
         function verificarCodigo(event) {
@@ -360,6 +361,7 @@
             }
         }
 
+        // VISTA PREVIA DE LA IMAGEN QUE SUBE EL USUARIO
         function mostrarVistaPrevia(input) {
             const preview = document.getElementById('preview_bici');
             const maxSize = 2 * 1024 * 1024; 
@@ -416,7 +418,14 @@
             </button>
 
             <div class="titulo">Registro de Usuario</div>
-            <form id="registroForm" onsubmit="registrarUsuario(event)">
+
+            <!-- ***************************** FORMULARIOS EMPIEZA AQUI ***************************** -->
+
+            <!--<form id="registroForm" onsubmit="registrarUsuario(event)">-->
+            <form method="POST" action="/registro">
+                
+                @csrf
+
                 <!-- Usuario -->
                 <div class="form-group">
                     <input type="text" id="usuario" name="usuario" placeholder="Ingresa tu usuario" required>
@@ -441,17 +450,36 @@
                     <img id="preview_bici" class="image-preview" alt="Vista Previa de la Imagen">
                 </div>
 
-                <!-- Botón para Verificar Correo -->
+                <!-- Contraseña -->
+                <div class="form-group">
+                    <label for="contraseña">Contraseña:</label>
+                    <input type="password" id="contraseña1" name="contraseña1" placeholder="******" required>
+                </div>
+
+                <!-- Confirmar contraseña -->
+                <div class="form-group">
+                    <label for="contraseña">Confirmar contraseña:</label>
+                    <input type="password" id="contraseña2" name="contraseña2" placeholder="******" required>
+                </div>
+
+                <!-- BOTON PARA ACEPTAR -->
+                <div class="form-group campo-verificacion" id="campoVerificacion">
+                    <button type="submit" class="boton boton-confirmar">Registrarse</button>
+                </div>
+
+                <!-- Botón para Verificar Correo 
                 <div class="form-group">
                     <button type="button" class="boton boton-verificar" onclick="registrarUsuario(event)">Verificar Correo</button>
                 </div>
+                -->
 
-                <!-- Campo para Ingresar el Código de Verificación -->
+                <!-- Campo para Ingresar el Código de Verificación 
                 <div class="form-group campo-verificacion" id="campoVerificacion">
                     <input type="text" id="codigoIngresado" name="codigoIngresado" placeholder="Ingresa el código recibido en tu correo" required>
                     <div id="errorCodigo" class="error-message"></div>
                     <button type="button" class="boton boton-confirmar" onclick="verificarCodigo(event)">Confirmar Código</button>
                 </div>
+                -->
 
             </form>
         </div>
