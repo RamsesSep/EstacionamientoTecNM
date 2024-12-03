@@ -7,6 +7,7 @@
     <title>Registro de Bicicletas</title>
     <style>
         /* Reset de estilos */
+        /* Reset de estilos */
         * {
             margin: 0;
             padding: 0;
@@ -200,41 +201,16 @@
             background-color: #0015ff;
         }
 
-        .tabla-registros {
+        /* Ocultar inicialmente ambas tablas */
+        .tabla-registros,
+        .tabla-registros-vehiculos {
+            display: none;
             width: 100%;
             border-collapse: collapse;
         }
 
         .tabla-registros th,
-        .tabla-registros td {
-            border: 1px solid #ddd;
-            padding: 12px;
-            text-align: center;
-        }
-
-        .tabla-registros th {
-            background-color: #007BFF;
-            color: white;
-        }
-
-        .tabla-registros tr:nth-child(even) {
-            background-color: #f2f2f2;
-            color: #333;
-        }
-
-        .tabla-registros tr:hover {
-            background-color: #ddd;
-            color: #000;
-        }
-
-        /* ------------- */
-
-        .tabla-registros-vehiculos {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 25px;
-        }
-
+        .tabla-registros td,
         .tabla-registros-vehiculos th,
         .tabla-registros-vehiculos td {
             border: 1px solid #ddd;
@@ -242,19 +218,48 @@
             text-align: center;
         }
 
+        .tabla-registros th,
         .tabla-registros-vehiculos th {
             background-color: #007BFF;
             color: white;
         }
 
+        .tabla-registros tr:nth-child(even),
         .tabla-registros-vehiculos tr:nth-child(even) {
             background-color: #f2f2f2;
             color: #333;
         }
 
+        /*
+        .tabla-registros tr:hover,
         .tabla-registros-vehiculos tr:hover {
             background-color: #ddd;
             color: #000;
+        }
+        */
+
+        /* Mostrar tabla seleccionada */
+        .visible {
+            display: table;
+        }
+
+        .select-container {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .select-container label {
+            font-size: 18px;
+            margin-right: 10px;
+            color: white;
+        }
+
+        .select-container select {
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            outline: none;
         }
 
         /* ------------- */
@@ -368,24 +373,24 @@
     <div class="header">
         <button class="toggle-btn" aria-label="Abrir menú lateral">
             <!-- Icono de hamburguesa -->
-            <img src="IMG/Menu.svg" width="30" height="30" alt="Menu">
+            <img src="{{ asset('images/Menu.svg') }}" width="30" height="30" alt="Menu">
         </button>
-        <img src="IMG/tecnm.png" alt="Logo TECNM" class="logo">
-        <img src="IMG/itl.png" alt="Logo ITL" class="logo2">
+        <img src="{{ asset('images/tecnm.png') }}" alt="Logo TECNM" class="logo">
+        <img src="{{ asset('images/itl.png') }}" alt="Logo ITL" class="logo2">
     </div>
 
     <!-- Menú Lateral -->
     <div class="sidebar">
         <div class="logo">Menú</div>
         <ul>
-            <li onclick="window.location.href='Menu_Guardia.html'">
+            <li onclick="window.location.href='{{ route('scaneo-guardia') }}'">
                 <!-- Icono Registros -->
-                <img src="IMG/sacan.svg" width="20" height="20" alt="Registros">
+                <img src="{{ asset('images/sacan.svg') }}" width="20" height="20" alt="Registros">
                 <span>Escaneo</span>
             </li>
             <li class="salir">
                 <!-- Icono Salir -->
-                <img src="IMG/power.svg" width="20" height="20" alt="salir" style="margin-right: 10px;">
+                <img src="{{ asset('images/power.svg') }}" width="20" height="20" alt="salir" style="margin-right: 10px;">
                 <span>Cerrar sesion</span>
             </li>
         </ul>
@@ -403,18 +408,28 @@
                 </button>
             </div>
 
+            <div class="select-container">
+                <label for="tipoRegistro">Selecciona el tipo de registro:</label>
+                <select id="tipoRegistro">
+                    <option value="" disabled selected>--Selecciona una opción--</option>
+                    <option value="bicicletas">Bicicletas</option>
+                    <option value="vehiculos">Vehículos</option>
+                </select>
+            </div>            
+
             <table class="tabla-registros" id="tablaRegistros">
                 <thead>
                     <tr>
                         <th>ID de Registro</th>
-                        <th>Número de Control</th>
-                        <th>ID de Bicicleta</th>
-                        <th>ID Punto de Acceso</th>
+                        <th>Placas de vehiculo</th>
+                        <th>Marca</th>
+                        <th>Modelo</th>
                         <th>Código QR</th>
                         <th>Fecha</th>
                     </tr>
                 </thead>
                 <tbody>
+                    <!-- CONTENIDO DINAMICO - INICIO -->
                 </tbody>
             </table>
 
@@ -422,18 +437,61 @@
                 <thead>
                     <tr>
                         <th>ID de Registro</th>
-                        <th>Número de Control</th>
-                        <th>Placa de vehículo</th>
-                        <th>ID Punto de Acceso</th>
-                        <th>Código QR</th>
-                        <th>Fecha locota</th>
+                        <th>Placas de vehiculo</th>
+                        <th>Marca</th>
+                        <th>Modelo</th>
+                        <th>Color</th>
+                        <th>Tipo</th>
+                        <th>Numero de control del dueño</th>
+                        <th>Fecha y hora de registro</th>
+                        <th>Ultima actualizacion</th>
                     </tr>
                 </thead>
                 <tbody>
+                    <!-- CONTENIDO DINAMICO - INICIO -->
+                    @foreach ($vehiculos as $vehiculo)
+                        <tr>
+                            <td>{{ $vehiculo->id }}</td>
+                            <td>{{ $vehiculo->placas }}</td>
+                            <td>{{ $vehiculo->marca }}</td>
+                            <td>{{ $vehiculo->modelo }}</td>
+                            <td>{{ $vehiculo->color }}</td>
+                            <td>{{ $vehiculo->tipo }}</td>
+                            <td>{{ $vehiculo->numero_control }}</td>
+                            <td>{{ $vehiculo->created_at }}</td>
+                            <td>{{ $vehiculo->updated_at }}</td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
     </div>
+
+    <script>
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const select = document.getElementById("tipoRegistro");
+            const tablaBicicletas = document.querySelector(".tabla-registros");
+            const tablaVehiculos = document.querySelector(".tabla-registros-vehiculos");
+
+            // Escuchar cambios en el select
+            select.addEventListener("change", () => {
+                const opcionSeleccionada = select.value;
+
+                // Ocultar ambas tablas inicialmente
+                tablaBicicletas.classList.remove("visible");
+                tablaVehiculos.classList.remove("visible");
+
+                // Mostrar la tabla correspondiente
+                if (opcionSeleccionada === "bicicletas") {
+                    tablaBicicletas.classList.add("visible");
+                } else if (opcionSeleccionada === "vehiculos") {
+                    tablaVehiculos.classList.add("visible");
+                }
+            });
+        });
+
+    </script>
 
 </body>
 

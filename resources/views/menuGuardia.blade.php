@@ -251,16 +251,16 @@
             display: none;
         }
         .logo {
-    width: 120px; 
-    height: auto; 
-    margin-left: 20px; 
-}
-.logo2 {
-    width: 50px; 
-    height: auto; 
-    margin-left: 20px; 
+            width: 120px; 
+            height: auto; 
+            margin-left: 20px; 
+        }
+        .logo2 {
+            width: 50px; 
+            height: auto; 
+            margin-left: 20px; 
 
-}
+        }
 
         /* Responsividad */
         @media (max-width: 800px) {
@@ -413,24 +413,24 @@
     <div class="header">
         <button class="toggle-btn" aria-label="Abrir menú lateral">
             <!-- Icono de hamburguesa -->
-            <img src="IMG/Menu.svg" width="30" height="30" alt="Menu">
+            <img src="{{ asset('images/Menu.svg') }}" width="30" height="30" alt="Menu">
         </button>
-        <img src="IMG/tecnm.png" alt="Logo TECNM" class="logo">
-        <img src="IMG/itl.png" alt="Logo ITL" class="logo2">    </div>
+        <img src="{{ asset('images/tecnm.png') }}" alt="Logo TECNM" class="logo">
+        <img src="{{ asset('images/itl.png') }}" alt="Logo ITL" class="logo2">    </div>
 
     <!-- Menú Lateral -->
     <div class="sidebar">
         <div class="logo">Menú</div>
         <ul>
-            <li onclick="window.location.href='Registro_Guardia.html'">
+            <li onclick="window.location.href='{{ route('registros-vehiculos') }}'">
                 <!-- Icono Registros -->
-                <img src="IMG/historial.svg" width="20" height="20" alt="Registros">
+                <img src="{{ asset('images/historial.svg') }}" width="20" height="20" alt="Registros">
                 <span>Registros</span>
             </li>
             <!-- Puedes agregar más elementos de menú aquí si lo deseas -->
             <li class="salir" onclick="salir()">
                 <!-- Icono Salir -->
-                <img src="IMG/power.svg" width="20" height="20" alt="salir" style="margin-right: 10px;">
+                <img src="{{ asset('images/power.svg') }}" width="20" height="20" alt="salir" style="margin-right: 10px;">
                 <span>Cerrar sesion</span>
             </li>
         </ul>

@@ -28,8 +28,8 @@ class HomeController extends Controller
         $usuario = Usuario::where('numero_control', $validated['numero_control'])->first();
 
         // Verificar si el usuario existe y la contraseña es válida
-        if ($usuario && $validated['contraseña'] == $usuario->contraseña) {
-
+        if ($usuario && $validated['contraseña'] == $usuario->contraseña) 
+        {
             $this->enviarDatos($usuario->numero_control);
 
             // Autenticar al usuario
@@ -39,8 +39,16 @@ class HomeController extends Controller
             // Almacenar datos en la sesión
             $request->session()->put('numeroControl', $usuario->numero_control);
 
-            // Redirigir a la página principal con los datos de sesión
-            return redirect('/inicio')->with('success', 'Sesión iniciada correctamente');
+            if ($usuario->rol == "administrador")
+            {
+                // Redirigir a la página de administrador
+                return redirect('/registro-guardia');
+            }
+            else
+            {
+                // Redirigir a la página principal con los datos de sesión de usuario normal
+                return redirect('/inicio')->with('success', 'Sesión iniciada correctamente');
+            }
         }
 
         // Si las credenciales no son válidas

@@ -22,6 +22,8 @@ class Usuario extends Authenticatable
 
     use HasFactory, Notifiable;
 
+    public $timestamps = false; 
+
     protected $table = 'usuarios';  
  // Nombre de la tabla en la base de datos
     protected $primaryKey = 'numero_control'; // Clave primaria de la tabla

@@ -25,6 +25,6 @@ class RegistroUsuarioController extends Controller
 
         $usuario->save();
 
-        return redirect('/inicio');
+        return redirect('/');
     }
 }
