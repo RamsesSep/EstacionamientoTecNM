@@ -18,6 +18,6 @@ class Vehiculo extends Model
 
     public function getQrCodeAttribute()
     {
-        return QrCode::size(100)->generate(route('vehiculo.detalle', $this));
+        return QrCode::size(50)->generate(route('vehiculo.detalle', $this));
     }
 }

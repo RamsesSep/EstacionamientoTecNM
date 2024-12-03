@@ -9,48 +9,67 @@ use Illuminate\Support\Facades\Hash;
 
 class HomeController extends Controller
 {
+    // Página de inicio
     public function __invoke()
     {
         return view('Inicio');
     }
 
+    // Método para manejar el inicio de sesión
     public function loguearse(Request $request)
     {
-        // Metodo para usar el modelo
-        $Usuario = new Usuario();
+        // Validar las entradas del formulario
+        $validated = $request->validate([
+            'numero_control' => 'required|string',
+            'contraseña' => 'required|string',
+        ]);
 
-        // Recuperamos los datos de la tabla usuarios
-        //$Usuario->numero_control = $request->numero_control;
-        //$Usuario->contraseña = $request->contraseña;
-        
-        // Obtener el número de control y la contraseña del formulario
-        $numeroControl = $request->input('numero_control');
-        $contraseña = $request->input('contraseña');
+        // Buscar al usuario en la base de datos por número de control
+        $usuario = Usuario::where('numero_control', $validated['numero_control'])->first();
 
-        echo $numeroControl;
-        echo $contraseña;
-        // Solo para verificar que si optengo los datos
-        //dd($Usuario->numero_control, $Usuario->contraseña);
+        // Verificar si el usuario existe y la contraseña es válida
+        if ($usuario && $validated['contraseña'] == $usuario->contraseña) {
 
-        // Buscar al usuario en la base de datos por su número de control
-        $usuario = Usuario::where('numero_control', $numeroControl)->first();
+            $this->enviarDatos($usuario->numero_control);
 
-        // Si el usuario existe y la contraseña es correcta
-        if ($usuario && ($contraseña == $usuario->contraseña))
-        {
             // Autenticar al usuario
             Auth::login($usuario);
             $request->session()->regenerate();
 
-            // Redirigir a la página principal
-            //return redirect()->intended('/inicio');
-            return redirect('/inicio')->with('numeroControl', $numeroControl);
-        } 
-        else 
-        {
-            // Autenticación fallida
-            return back()->withErrors(['error' => 'Credenciales incorrectas']);
+            // Almacenar datos en la sesión
+            $request->session()->put('numeroControl', $usuario->numero_control);
+
+            // Redirigir a la página principal con los datos de sesión
+            return redirect('/inicio')->with('success', 'Sesión iniciada correctamente');
         }
-        
+
+        // Si las credenciales no son válidas
+        return back()->withErrors(['error' => 'Credenciales incorrectas']);
+    }
+
+    // Enviar la variable de numero_control
+    public function enviarDatos($numero_control)
+    {
+        return redirect('/inicio')->with('numero_control', $numero_control);
+        //return redirect('/inicio/registrar-vehiculo/nuevo')->with('mensaje', $variable);
+    }
+
+
+    // Método para registrar un nuevo usuario
+    public function registrar(Request $request)
+    {
+        // Validar las entradas
+        $validated = $request->validate([
+            'numero_control' => 'required|string|unique:usuarios',
+            'contraseña' => 'required|string|min:8',
+        ]);
+
+        // Crear y guardar el nuevo usuario
+        $usuario = new Usuario();
+        $usuario->numero_control = $validated['numero_control'];
+        $usuario->contraseña = Hash::make($validated['contraseña']); // Cifrar la contraseña
+        $usuario->save();
+
+        return redirect('/login')->with('success', 'Usuario registrado exitosamente');
     }
 }

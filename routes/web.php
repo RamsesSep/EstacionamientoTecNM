@@ -28,14 +28,7 @@ Route::post('/registro', [RegistroUsuarioController::class, 'nuevoUsuario']);
 Route::get('/recuperar-contraseña', [MenuController::class, 'recuperar'])->name('recuperar.contraseña');
 
 // RUTAS PRINCIPALES
-//Route::get('/inicio', [MenuController::class, 'index'])->name('inicio');
 Route::get('/inicio', [VehiculoController::class, 'getVehiculos'])->name('menu.autos');
-
-Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    });
-});
 
 Route::get('/inicio/monitoreo', [MenuController::class, 'monitoreo'])->name('monitoreo');
 Route::get('/inicio/registrar-bicicleta', [MenuController::class, 'registrarBici'])->name('registrar.bici');
@@ -47,7 +40,5 @@ Route::get('/inicio/registrar-vehiculo', [VehiculoController::class, 'create'])-
 // Esta es la ruta que usa el formulario
 Route::post('/inicio/registrar-vehiculo/nuevo', [VehiculoController::class, 'store']);
 // Esta es la ruta que recupera los vehiculos
-//Route::get('/vehiculos/{vehiculo}', [VehiculoController::class, 'show'])->name('vehiculo.detalle');
-//Route::get('/obtener-vehiculos', [VehiculoController::class, 'obtenerVehiculos']);
-
+Route::get('/vehiculos/{vehiculo}', [VehiculoController::class, 'show'])->name('vehiculo.detalle');
 

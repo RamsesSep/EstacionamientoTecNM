@@ -32,34 +32,24 @@ class VehiculoController extends Controller
 
     public function getVehiculos(Request $request)
     {
-        // Obtener el número de control del localStorage
-        $numeroControl = $request->input('numero_control');
-        
-        //echo "Este es el numero de control:".$numeroControl;
-        // Recupera todos los registros de la tabla 'vehiculos'
-        /*
-        $vehiculos = Vehiculo::all();
-        // Envía los datos a la vista
-        return view('Menu', compact('vehiculos'));
-        */
-        // Obtener los vehículos del usuario con el número de control especificado
+        // Recuperar el número de control desde la sesión
+        $numeroControl = $request->session()->get('numeroControl');
+
+        //$vehiculos = Vehiculo::all(); // Recupera todos los registros de la tabla 'vehiculos'
+        // Obtener los vehículos que tienen el mismo número de control (si es necesario)
         $vehiculos = Vehiculo::where('numero_control', $numeroControl)->get();
 
-        return view('Menu', compact('vehiculos'));
-        //return response()->json($vehiculos); // Devolver los vehículos como JSON
+        //return view('Menu', compact('vehiculos')); // Envía los datos a la vista
+        // Enviar los datos a la vista, incluyendo los vehículos y el número de control
+        return view('Menu', compact('vehiculos', 'numeroControl'));
     }
 
     public function index()
     {
-        // Obtener los vehículos que quieres mostrar en el menú
+        // Obtener los vehículos que quieres mostrar en el menú (ajusta según tu lógica)
         $vehiculos = Vehiculo::all();
 
         return view('Menu', compact('vehiculos'));
-    }
-
-    public function obtenerVehiculos()
-    {
-        //
     }
 
 }

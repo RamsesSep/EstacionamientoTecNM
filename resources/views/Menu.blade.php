@@ -342,8 +342,6 @@
         var numeroControlAlmacenado = localStorage.getItem('numeroControl');
         console.log(numeroControlAlmacenado); // Usar el número de control
 
-        
-
     </script>
 </head>
 
@@ -447,7 +445,9 @@
                             <td>{{ $vehiculo->numero_control }}</td>
                             <td>{{ $vehiculo->created_at }}</td>
                             <td>{{ $vehiculo->updated_at }}</td>
-                            <td> <img src="data:image/png;base64,{{ $vehiculo->qr_code }} "> </td>
+                            <td> 
+                                {{ $vehiculo->qr_code }}
+                             </td>                             
                         </tr>
                     @endforeach
                 </tbody>
