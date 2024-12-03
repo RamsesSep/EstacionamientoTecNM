@@ -4,6 +4,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\monitoreo;
 use App\Http\Controllers\VehiculoController;
 use App\Http\Controllers\RegistroUsuarioController;
 
@@ -30,7 +31,11 @@ Route::get('/recuperar-contraseña', [MenuController::class, 'recuperar'])->name
 // RUTAS PRINCIPALES
 Route::get('/inicio', [VehiculoController::class, 'getVehiculos'])->name('menu.autos');
 
-Route::get('/inicio/monitoreo', [MenuController::class, 'monitoreo'])->name('monitoreo');
+// RUTA PARA EL MONITOREO DEL ESTACIONAMIENTO
+//Route::get('/inicio/monitoreo', [monitoreo::class, 'monitoreo'])->name('monitoreo');
+Route::get('/inicio/monitoreo', [monitoreo::class, 'mostrarMonitoreo'])->name('monitoreo');
+
+
 Route::get('/inicio/registrar-bicicleta', [MenuController::class, 'registrarBici'])->name('registrar.bici');
 Route::get('/inicio/perfil', [MenuController::class, 'perfil'])->name('perfil');
 Route::get('/inicio/qr', [MenuController::class, 'qr'])->name('qr');

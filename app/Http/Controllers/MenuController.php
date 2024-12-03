@@ -16,11 +16,6 @@ class MenuController extends Controller
         return view('registroBici');
     }
 
-    public function monitoreo()
-    {
-        return view('monitoreo');
-    }
-
     public function perfil()
     {
         return view('perfil');

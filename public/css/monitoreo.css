@@ -156,7 +156,7 @@ select, .info {
 }
 
 .info {
-    display: none; /* Inicialmente oculto */
+    /*display: none; /* Inicialmente oculto */
     padding: 10px;
     border-radius: 8px;
     margin-top: 20px;
@@ -164,7 +164,7 @@ select, .info {
 /* INFORMACION DEL ESTACIONAMIENTO */
 .container {
     width: 100%;
-    max-width: 800px;
+    max-width: 100%;
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
