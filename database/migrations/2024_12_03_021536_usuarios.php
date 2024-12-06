@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('foto', 255)->nullable();
             $table->enum('rol', ['usuario', 'administrador'])->default('usuario');
             $table->string('contraseña', 255);
+            $table->binary('fotoUsuario')->nullable()->after('foto'); 
             $table->timestamps(); // Agrega las columnas created_at y updated_at
         });
     }

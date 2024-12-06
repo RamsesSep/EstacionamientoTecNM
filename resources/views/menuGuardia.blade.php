@@ -396,7 +396,7 @@
             // Exponer la función salir() al objeto global window
             window.salir = function () {
                 if (confirm("¿Estás seguro de que deseas salir?")) {
-                    window.location.href = "Inicio.html";
+                    window.location.href = "{{ route('inicio.sesion') }}";
                 }
             };
 

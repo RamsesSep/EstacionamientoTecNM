@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Vehiculo;
+use App\Models\Bicicleta;
 
 class VehiculoController extends Controller
 {
@@ -38,10 +39,11 @@ class VehiculoController extends Controller
         //$vehiculos = Vehiculo::all(); // Recupera todos los registros de la tabla 'vehiculos'
         // Obtener los vehículos que tienen el mismo número de control (si es necesario)
         $vehiculos = Vehiculo::where('numero_control', $numeroControl)->get();
+        $bicicletas = Bicicleta::where('no_control', $numeroControl)->get();
 
         //return view('Menu', compact('vehiculos')); // Envía los datos a la vista
         // Enviar los datos a la vista, incluyendo los vehículos y el número de control
-        return view('Menu', compact('vehiculos', 'numeroControl'));
+        return view('Menu', compact('vehiculos', 'bicicletas', 'numeroControl'));
     }
 
     public function index()

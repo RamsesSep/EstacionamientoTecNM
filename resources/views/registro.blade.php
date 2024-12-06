@@ -422,7 +422,7 @@
             <!-- ***************************** FORMULARIOS EMPIEZA AQUI ***************************** -->
 
             <!--<form id="registroForm" onsubmit="registrarUsuario(event)">-->
-            <form method="POST" action="/registro">
+            <form method="POST" action="/registro" enctype="multipart/form-data">
                 
                 @csrf
 
@@ -446,7 +446,7 @@
                 <!-- Foto de Perfil (Opcional) -->
                 <div class="form-group">
                     <label for="fotoPerfil">Foto de Perfil (Opcional):</label>
-                    <input type="file" id="fotoPerfil" name="fotoPerfil" accept="image/*" onchange="mostrarVistaPrevia(this)">
+                    <input type="file" id="fotoPerfil" name="fotoPerfil" accept="image/*" onchange="mostrarVistaPrevia(this)" required>
                     <img id="preview_bici" class="image-preview" alt="Vista Previa de la Imagen">
                 </div>
 

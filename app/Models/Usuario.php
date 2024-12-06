@@ -42,6 +42,7 @@ class Usuario extends Authenticatable
         'foto',
         'rol',
         'contraseña',
+        'fotoUsuario',
     ];
 
     /**

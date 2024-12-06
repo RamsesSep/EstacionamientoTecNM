@@ -403,6 +403,39 @@
 
     <!-- Contenido Principal -->
     <div class="content">
+
+        <h2>Mis Bicicletas Registradas</h2>
+        <table class="tabla-registros" id="tablaRegistros">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Color</th>
+                    <th>Fecha de Registro</th>
+                    <th>Código QR</th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse ($bicicletas as $bicicleta)
+                    <tr>
+                        <td>{{ $bicicleta->id_bicicleta }}</td>
+                        <td>{{ $bicicleta->nombrebici }}</td>
+                        <td>{{ $bicicleta->color }}</td>
+                        <td>{{ $bicicleta->created_at->format('d/m/Y H:i') }}</td>
+                        <td>
+                        <button class="codigo-qr" onclick="window.location.href='{{ route('codigoQR', ['id_bicicleta' => $bicicleta->id_bicicleta]) }}'" style="background: none; border: none; cursor: pointer;">
+                            <img src="{{ asset('images/qr.svg') }}" alt="Codigo QR">
+                        </button>
+                        </td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="5">No hay bicicletas registradas.</td>
+                    </tr>
+                @endforelse
+            </tbody>
+        </table>
+
         <div class="tabla-container">
             <!-- Botón de Añadir Registro -->
             <!-- Botón de Añadir Registro -->
@@ -434,7 +467,7 @@
                 </thead>
                 <tbody>
                     <!-- Los registros se cargarán aquí -->
-                    @foreach ($vehiculos as $vehiculo)
+                    @forelse ($vehiculos as $vehiculo)
                         <tr>
                             <td>{{ $vehiculo->id }}</td>
                             <td>{{ $vehiculo->placas }}</td>
@@ -449,7 +482,12 @@
                                 {{ $vehiculo->qr_code }}
                              </td>                             
                         </tr>
-                    @endforeach
+                    @empty
+                        <tr>
+                            <td colspan="10">No hay vehiculos registrados.</td>
+                        </tr>
+                    @endforelse
+                    
                 </tbody>
             </table>
         </div>

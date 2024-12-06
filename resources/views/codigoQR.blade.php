@@ -208,16 +208,16 @@
             height: 20px;
         }
         .logo {
-    width: 120px; 
-    height: auto; 
-    margin-left: 20px; 
-}
-.logo2 {
-    width: 50px; 
-    height: auto; 
-    margin-left: 20px; 
+            width: 120px; 
+            height: auto; 
+            margin-left: 20px; 
+        }
+        .logo2 {
+            width: 50px; 
+            height: auto; 
+            margin-left: 20px; 
 
-}
+        }
 
         /* Responsividad */
         @media (max-width: 768px) {
@@ -310,64 +310,113 @@
             border-radius: 4px; 
         }
     </style>
-    <script>
+    <script type="module">
+        import QrScanner from "https://unpkg.com/qr-scanner@1.4.2/qr-scanner.min.js";
+
+        QrScanner.WORKER_PATH = 'https://unpkg.com/qr-scanner@1.4.2/qr-scanner-worker.min.js';
+
         document.addEventListener("DOMContentLoaded", function () {
-            const toggleBtn = document.querySelector(".toggle-btn");
-            const sidebar = document.querySelector(".sidebar");
-            const content = document.querySelector(".content");
+            const video = document.getElementById('video-preview');
+            const botonEscaneo = document.getElementById('botonEscaneo');
+            const resultadoNoControl = document.getElementById('noControl');
+            const resultadoColor = document.getElementById('colorBici');
+            const resultadoNombre = document.getElementById('nombreUsuario');
+            const fotoBici = document.getElementById('fotoBici');
+            const fotoEstudiante = document.getElementById('fotoEstudiante');
+            const botonValidar = document.getElementById('botonValidar');
 
-            // Función para abrir/ocultar el menú lateral
-            toggleBtn.addEventListener("click", () => {
-                sidebar.classList.toggle("active");
+            let qrScanner;
 
-                // Ajustar el margen del contenido según el estado del sidebar en escritorio
-                if (window.innerWidth > 768) {
-                    if (sidebar.classList.contains("active")) {
-                        content.style.marginLeft = "250px";
-                    } else {
-                        content.style.marginLeft = "0";
-                    }
-                }
-            });
-
-            // Ajustar el estado del sidebar al redimensionar la ventana
-            window.addEventListener("resize", () => {
-                if (window.innerWidth > 768) {
-                    // Asegurar que el sidebar esté activo en escritorio
-                    sidebar.classList.add("active");
-                    content.style.marginLeft = "250px";
+            function verificarCamposCompletos() {
+                if (resultadoNoControl.value && resultadoColor.value && resultadoNombre.value) {
+                    botonValidar.style.display = 'inline-block'; // Mostrar el botón de "Validar entrada"
                 } else {
-                    // Ocultar el sidebar por defecto en móviles
-                    sidebar.classList.remove("active");
-                    content.style.marginLeft = "0";
+                    botonValidar.style.display = 'none'; // Ocultar el botón si algún campo está vacío
                 }
+            }
+
+            const toggleBtn = document.querySelector(".toggle-btn");
+                const sidebar = document.querySelector(".sidebar");
+
+                toggleBtn.addEventListener("click", () => {
+                    sidebar.classList.toggle("active");
+                    // Ajustar el margen del contenido según el estado del sidebar
+                    if (sidebar.classList.contains("active")) {
+                        document.querySelector(".content").style.marginLeft = "250px";
+                    } else {
+                        document.querySelector(".content").style.marginLeft = "0";
+                    }
+                });
+
+            botonEscaneo.addEventListener('click', () => {
+                botonEscaneo.style.display = 'none';
+                iniciarEscaneo();
             });
 
-            // Inicializar el estado del sidebar basado en el tamaño de la ventana al cargar
-            if (window.innerWidth > 768) {
-                sidebar.classList.add("active");
-                content.style.marginLeft = "250px";
-            } else {
-                sidebar.classList.remove("active");
-                content.style.marginLeft = "0";
+            function iniciarEscaneo() {
+                video.style.display = 'block';
+                qrScanner = new QrScanner(video, result => {
+                    procesarResultado(result);
+                    qrScanner.stop();
+                    video.style.display = 'none';
+                    botonEscaneo.style.display = 'block';
+                }, {
+                    onDecodeError: error => {
+                        console.warn(`Error de decodificación: ${error}`);
+                    },
+                    highlightScanRegion: true,
+                    highlightCodeOutline: true
+                });
+
+                qrScanner.start();
             }
+
+            function procesarResultado(result) {
+                // El QR contiene un objeto JSON, decodificarlo
+                const registro = JSON.parse(result.data); // El contenido del QR
+
+                if (registro) {
+                    // Mostrar la información del usuario y la bicicleta
+                    resultadoNoControl.value = registro.noControl || 'N/A';
+                    resultadoColor.value = registro.colorBici || 'N/A';
+                    resultadoNombre.value = registro.nombreUsuario || 'N/A';
+
+                    if (registro.bicicleta_foto) {
+                        // Si la URL de la foto de la bicicleta ya está en el QR, la mostramos
+                        fotoBici.src = registro.bicicleta_foto; // URL de la foto de la bicicleta
+                        fotoBici.style.display = 'block';
+                    } else if (registro.id_bicicleta) {
+                        // Si no, construimos la URL usando el id_bicicleta
+                        fotoBici.src = `http://localhost:8000/storage/bicicletas/${registro.id_bicicleta}.jpg`;
+                        fotoBici.style.display = 'block';
+                    } else {
+                        fotoBici.style.display = 'none';
+                    }
+
+                    // Ajustamos la URL de la foto del usuario (sin el prefijo extra)
+                    if (registro.usuario_foto) {
+                        const usuarioFotoURL = registro.usuario_foto.replace("/perfil_images/perfil_images", "/perfil_images");
+                        fotoEstudiante.src = usuarioFotoURL;
+                        fotoEstudiante.style.display = 'block';
+                    } else {
+                        fotoEstudiante.style.display = 'none';
+                    }
+
+                    document.getElementById('zona').value = registro.zona;
+
+                    verificarCamposCompletos();
+                } else {
+                    alert("No se pudo procesar la información del QR.");
+                }
+            }
+
+            // Exponer la función salir() al objeto global window
+            window.salir = function () {
+                if (confirm("¿Estás seguro de que deseas salir?")) {
+                    window.location.href = "{{ route('inicio.sesion') }}";
+                }
+            };
         });
-
-        // Función para salir del sistema
-        function salir() {
-            if (confirm("¿Estás seguro de que deseas salir?")) {
-                window.location.href = "Inicio.html";
-            }
-        }
-
-        // Funciones específicas para esta página
-        function regresar() {
-            window.history.back();
-        }
-
-        function imprimirPagina() {
-            window.print();
-        }
     </script>
 </head>
 
@@ -417,14 +466,20 @@
         <div class="confirmacion">
             <!--  Ícono en la Parte Superior Derecha  -->
             <div class="icono-menu">
-                <a href="Menu.html" aria-label="Ir al Menú">
+                <a href="{{ route('menu.autos') }}" aria-label="Ir al Menú">
                     <img src="{{ asset('images/cancelar.svg') }}" alt="Ir al Menú" class="menu-icon">
                 </a>
             </div>
 
             <p>Este es tu código QR generado:</p>
-            <img src="{{ asset('images/Commons_QR_code.png') }}" alt="Código QR">
+            <img src="{{ asset('images/qr_codes/' . $fileName) }}" alt="Código QR" style="width: 300px; height: 300px;">
+
+            <div class="acciones">
+                <button onclick="imprimirPagina()">Imprimir</button>
+                <button onclick="regresar()">Regresar</button>
+            </div>
         </div>
+
     </div>
 
 </body>

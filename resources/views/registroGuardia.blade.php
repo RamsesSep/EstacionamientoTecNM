@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro de Bicicletas</title>
+    <title>Registro de Vehiculos</title>
     <style>
         /* Reset de estilos */
         /* Reset de estilos */
@@ -357,7 +357,7 @@
 
         function salir() {
             if (confirm("¿Estás seguro de que deseas salir?")) {
-                window.location.href = "Inicio.html";
+                window.location.href = "{{ route('inicio.sesion') }}";
             }
         }
 
@@ -399,7 +399,7 @@
     <!-- Contenido Principal -->
     <div class="content">
         <div class="registro-container">
-            <div class="titulo">Registros de Bicicletas</div>
+            <div class="titulo">Registros de Vehiculos ingresados</div>
 
             <!-- Barra de Búsqueda -->
             <div class="barra-busqueda">
@@ -421,15 +421,27 @@
                 <thead>
                     <tr>
                         <th>ID de Registro</th>
-                        <th>Placas de vehiculo</th>
-                        <th>Marca</th>
-                        <th>Modelo</th>
+                        <th>Nombre de la bicicleta</th>
+                        <th>Color</th>
                         <th>Código QR</th>
-                        <th>Fecha</th>
+                        <th>Foto</th>
+                        <th>numero de control del dueño</th>
+                        <th>Fecha de registro</th>
                     </tr>
                 </thead>
                 <tbody>
                     <!-- CONTENIDO DINAMICO - INICIO -->
+                    @foreach ($bicicletas as $bicicleta)
+                        <tr>
+                            <td>{{ $bicicleta->id_bicicleta }}</td>
+                            <td>{{ $bicicleta->nombrebici }}</td>
+                            <td>{{ $bicicleta->color }}</td>
+                            <td>{{ $bicicleta->codigo_qr }}</td>
+                            <td><img src="{{ $bicicleta->fotoBici }}" style="width: 100px; height: 100px;"></td>
+                            <td>{{ $bicicleta->no_control }}</td>
+                            <td>{{ $bicicleta->fecha_registro }}</td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
 

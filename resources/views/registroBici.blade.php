@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="shortcut icon" href="{{ asset('images/bici.svg') }}">
     <title>Registro de Bicicleta</title>
     <style>
@@ -520,6 +521,10 @@
                 mensajeDiv.style.display = 'none';
             }, 5000);
         }
+        function enviarFormulario(event) {
+            event.preventDefault();
+            alert("Formulario enviado correctamente.");
+        }
     </script>
 </head>
 
@@ -565,7 +570,8 @@
             <!-- Div para mensajes -->
             <div id="mensaje"></div>
 
-            <form id="registroForm" onsubmit="enviarFormulario(event)">
+            <form id="registroForm" method="POST" action="{{ route('registro.bicicletas.store') }}" enctype="multipart/form-data">
+                @csrf
                 <!-- Nombre de la Bicicleta -->
                 <div class="form-group">
                     <label for="nombreBicicleta"></label>

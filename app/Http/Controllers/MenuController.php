@@ -11,10 +11,12 @@ class MenuController extends Controller
         return view('Menu');
     }
 
+    /*
     public function registrarBici()
     {
         return view('registroBici');
     }
+    */
 
     public function perfil()
     {
